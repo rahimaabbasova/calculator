@@ -4,7 +4,7 @@ import { percentageClicked } from '../actions';
 const initialState = {
     number: "",
     screen: "0",
-    percentageClickedInitial: false, 
+    percentageClickedInitial: false,
     processContinued: false,
     firstNumber: "",
     process: ""
@@ -17,7 +17,23 @@ const numberClickedScreen = (state, action) => {
         return (state.screen === "0" ? action.number : state.screen + action.number)
     }
 }
-
+const equalClicked = (state, action) => {
+    if (state.process === "subtraction") {
+        return (Number(state.firstNumber) - Number(state.screen)).toString()
+    }
+    if (state.process === "summation") {
+        return (Number(state.firstNumber) + Number(state.screen)).toString()
+    }
+    if (state.process === "multiplication") {
+        return (Number(state.firstNumber) * Number(state.screen)).toString()
+    }
+    if (state.process === "division") {
+        return (Number(state.firstNumber) / Number(state.screen)).toString()
+    }
+    if (state.process === "") {
+        return (state.screen)
+    }
+}
 export default function (state = initialState, action) {
     switch (action.type) {
         case NUMBER_CLICKED: {
@@ -27,6 +43,7 @@ export default function (state = initialState, action) {
                 screen: numberClickedScreen(state, action),
                 percentageClickedInitial: false,
                 processContinued: false,
+
             }
         }
         case AC_CLICKED: {
@@ -34,8 +51,8 @@ export default function (state = initialState, action) {
                 ...state,
                 number: "",
                 screen: "0",
-                divisionClickedInitial: false,
-                percentageClickedInitial: false
+                percentageClickedInitial: false,
+                process: ""
 
             }
         }
@@ -64,18 +81,18 @@ export default function (state = initialState, action) {
         case EQUAL_CLICKED: {
             return {
                 ...state,
-                screen: state.pro ? (Number(state.divisionFirstNumber) / Number(state.screen)).toString() : state.screen,
+                screen: equalClicked(state, action),
+                process: ""
             }
         }
         case START_PROCESS: {
             return {
                 ...state,
+                firstNumber: state.screen,
                 process: action.process,
-                processContinued: true
+                processContinued: true,
             }
         }
-
-
         default:
             return state;
     }

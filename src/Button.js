@@ -1,5 +1,5 @@
 import React from 'react';
-import { acClicked, divisionClickedInitial, numberClicked, minusClicked, percentageClicked, pointClicked, equalClicked } from "./redux/actions"
+import { acClicked, divisionClickedInitial, numberClicked, minusClicked, percentageClicked, pointClicked, equalClicked, startProcess } from "./redux/actions"
 import { useDispatch } from "react-redux"
 
 export default function Button(props) {
@@ -22,8 +22,18 @@ export default function Button(props) {
         if (props.state === "AC" || props.state === "C") {
             dispatch(acClicked())
         } else if (props.state === "/") {
-            dispatch(divisionClickedInitial())
-        } else if (props.state === "+/-") {
+            dispatch(startProcess("division"))
+        
+        } else if (props.state === "x") {
+            dispatch(startProcess("multiplication"))
+        } 
+        else if (props.state === "+") {
+            dispatch(startProcess("summation"))
+        }
+        else if (props.state === "-") {
+            dispatch(startProcess("subtraction"))
+        } 
+        else if (props.state === "+/-") {
             dispatch(minusClicked())
         }
         else if (props.state === "%") {
