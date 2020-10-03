@@ -1,23 +1,26 @@
 import { NUMBER_CLICKED, AC_CLICKED, MINUS_CLICKED, PERCENTAGE_CLICKED, POINT_CLICKED, EQUAL_CLICKED, START_PROCESS } from '../actionTypes';
 import * as R from 'ramda'
-import { percentageClicked } from '../actions';
+import { percentageClicked } from '../actions';  //???
 const initialState = {
     number: "",
     screen: "0",
-    percentageClickedInitial: false,
-    processContinued: false,
+    percentageClickedInitial: false,  //???
+    processContinued: false,          //???
     firstNumber: "",
-    process: ""
+    process: "",
+    equal: false
 }
 //if percentage or division clicked,then start wrting new screen,otherwise add numbers to the current screen
 const numberClickedScreen = (state, action) => {
-    if (state.percentageClickedInitial || state.processContinued) {
+    if (state.percentageClickedInitial || state.processContinued || state.equal) {
         return action.number
-    } else {
-        return (state.screen === "0" ? action.number : state.screen + action.number)
+    }
+
+    else {
+        return (state.screen === "0" ? action.number : state.screen + action.number)//why we check state.screen=0?
     }
 }
-const equalClicked = (state, action) => {
+const equalClicked = (state, action) => { //we have equalclicked defined in actiontypes,can we cretae it again here?
     if (state.process === "subtraction") {
         return (Number(state.firstNumber) - Number(state.screen)).toString()
     }
@@ -52,7 +55,7 @@ export default function (state = initialState, action) {
                 number: "",
                 screen: "0",
                 percentageClickedInitial: false,
-                process: ""
+                process: "" //why we write process here? why we do not also write processcontinued?
 
             }
         }
@@ -82,7 +85,8 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 screen: equalClicked(state, action),
-                process: ""
+                process: "",
+                equal: true
             }
         }
         case START_PROCESS: {

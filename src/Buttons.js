@@ -19,7 +19,7 @@ export default function Buttons(props) {
             <div className='buttons-row'>
                 <Button state={acButtonState()} white />
                 <Button state={'+/-'} white />
-                <Button state={'%'} white={true} />
+                <Button state={'%'} white={true} /> 
                 <Button state={'/'} orange={!(process === "division")} white={(process === "division")} />
             </div>
             <div className='buttons-row'>

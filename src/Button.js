@@ -1,8 +1,8 @@
 import React from 'react';
-import { acClicked, divisionClickedInitial, numberClicked, minusClicked, percentageClicked, pointClicked, equalClicked, startProcess } from "./redux/actions"
+import { acClicked, numberClicked, minusClicked, percentageClicked, pointClicked, equalClicked, startProcess } from "./redux/actions"
 import { useDispatch } from "react-redux"
 
-export default function Button(props) {
+export default function Button(props) { //what does these two lines mean?
     const dispatch = useDispatch()
 
     const buttonClass = (props) => {
@@ -18,7 +18,7 @@ export default function Button(props) {
         return finalClass
     }
 
-    const ButtonClicked = (props) => {
+    const ButtonClicked = (props) => { // what is the difference between two buttons.js files?
         if (props.state === "AC" || props.state === "C") {
             dispatch(acClicked())
         } else if (props.state === "/") {
