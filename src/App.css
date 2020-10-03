@@ -1,5 +1,9 @@
 .App {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .App-logo {
@@ -41,13 +45,18 @@
 
 
 .screen {
-  background-color: grey;
-  color: white;
+  background-color: white;
+  color: black;
   height: 100px;
+  width: 440px;
   font-size: 50px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
+  box-shadow: 0 0 20px rgba(0,0,0,0.19);
+  padding-right: 20px;
+  border-radius: 20px;
+  margin: 20px 0;
 }
 .button-wrapper {
   width: 100px;
@@ -61,6 +70,7 @@
   font-size: 35px;
   cursor: pointer;
   margin: 10px;
+  -webkit-appearance: none;
 }
 .button-wrapper:hover{
   background-color: grey;
@@ -92,5 +102,8 @@
   }
   .button-large-width{
     width:140px;
+  }
+  .screen{
+    width:320px;
   }
 }

@@ -46,6 +46,7 @@ export default function (state = initialState, action) {
                 screen: numberClickedScreen(state, action),
                 percentageClickedInitial: false,
                 processContinued: false,
+                equal: false
 
             }
         }
@@ -55,21 +56,23 @@ export default function (state = initialState, action) {
                 number: "",
                 screen: "0",
                 percentageClickedInitial: false,
-                process: "" //why we write process here? why we do not also write processcontinued?
-
+                process: "",//why we write process here? why we do not also write processcontinued?
+                equal: false
             }
         }
         case MINUS_CLICKED: {
             return {
                 ...state,
-                screen: R.head(state.screen) === '-' ? R.drop(1, state.screen) : R.concat('-', state.screen)
+                screen: R.head(state.screen) === '-' ? R.drop(1, state.screen) : R.concat('-', state.screen),
+                equal: false
             }
         }
         case PERCENTAGE_CLICKED: {
             return {
                 ...state,
                 screen: state.screen / 100,
-                percentageClickedInitial: true
+                percentageClickedInitial: true,
+                equal: false
 
             }
         }
@@ -77,7 +80,8 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 percentageClickedInitial: false,
-                screen: R.includes('.', state.screen) ? state.screen : R.concat(state.screen, '.')
+                screen: R.includes('.', state.screen) ? state.screen : R.concat(state.screen, '.'),
+                equal: false
 
             }
         }
@@ -95,6 +99,7 @@ export default function (state = initialState, action) {
                 firstNumber: state.screen,
                 process: action.process,
                 processContinued: true,
+                equal: false
             }
         }
         default:
